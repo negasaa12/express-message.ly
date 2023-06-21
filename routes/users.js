@@ -1,10 +1,10 @@
 
-const db = require('../db');
-const express = require("express");
-const router = express.Router();
-const User =  require('../models/user');
 
+const Router = require("express").Router;
+const User = require("../models/user");
+const {ensureLoggedIn, ensureCorrectUser} = require("../middleware/auth");
 
+const router = new Router();
 
 
 /** GET / - get list of users.
@@ -14,14 +14,14 @@ const User =  require('../models/user');
  **/
 
 
-router.get('/', async (req, res, next)=>{
+router.get('/',  ensureLoggedIn, async  (req, res, next)=>{
 
 
     try{
 
-        const results = await User.all()
+        let user = User.all()
 
-        return results.rows;
+        return  res.json({user})
         
         
 
@@ -58,3 +58,6 @@ router.get('/', async (req, res, next)=>{
  *                 to_user: {username, first_name, last_name, phone}}, ...]}
  *
  **/
+
+
+module.exports = router;

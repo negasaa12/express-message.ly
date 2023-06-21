@@ -1,3 +1,12 @@
+const Router = require("express").Router;
+const User = require("../models/user");
+const {ensureLoggedIn, ensureCorrectUser} = require("../middleware/auth");
+
+const router = new Router();
+
+
+
+
 /** GET /:id - get detail of message.
  *
  * => {message: {id,
@@ -28,3 +37,4 @@
  *
  **/
 
+module.exports = router;
