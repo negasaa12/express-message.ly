@@ -14,12 +14,12 @@ const router = new Router();
  **/
 
 
-router.get('/',  ensureLoggedIn, async  (req, res, next)=>{
+router.get('/',   async  (req, res, next)=>{
 
 
     try{
 
-        let user = User.all()
+        let user = await User.all()
 
         return  res.json({user})
         
